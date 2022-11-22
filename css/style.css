@@ -4,7 +4,7 @@
     height: 500px;
     margin: 100px auto;
     /* DEBUG */
-    background-color: red;
+    /* background-color: red; */
 }
 
 .carousel{
@@ -30,6 +30,7 @@ img{
 }
 
 h1{
+    font-size: 30px;
     position: absolute;
     bottom: 100px;
     right: 50px;
@@ -37,6 +38,7 @@ h1{
 } 
 
 p{
+    font-size: 20px;
     width: 50%;
     position: absolute;
     text-align: right;

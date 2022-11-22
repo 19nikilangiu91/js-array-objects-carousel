@@ -31,6 +31,9 @@ console.log(divElementsContainer);
 // Andiamo a inserire il "div.elements-container" all'interno del "div.carousel".
 divCarousel.append(divElementsContainer);
 
+// Dichiaro l'indece attuale.
+let index = 0;
+
 // Andiamo a creare il nostro "array" che conterrà le nostre immagini.
 
 const images = [ 
@@ -63,42 +66,101 @@ const images = [
 
 console.log(images);
 
-images.forEach((element,index) => {
-
-     // Andiamo a creare il nostro "div" e andiamo ad aggiungere la classe "element" e la classe "active".
-
-    let divElement = document.createElement("div");
-    divElement.classList.add("element");
-
-    if(index === 0){
-        divElement.classList.add("active");
-    }else
-        divElement.classList.add("hidden");
-
-
-    // Andiamo a inserire il "div.elements-container" all'interno del "div.carousel".
-    divElementsContainer.append(divElement);
-    console.log(divElement)
+images.forEach((element, index, arrey) => {
 
     let nuovaCarta = [
-    `
-        <img src="${element.image}" alt="image ${element.image +1}">
+    `<div id="index${index}" class ="element">
+        <img src="${element.image}">
             <h1>${element.title}</h1>
             <p>${element.text}</p>
-    `
+    </div>`   
     ]
-    divElement.innerHTML += nuovaCarta;
-})
 
-// Andiamo a collegare il nostro bottone "next" e "prev" e inserirlo all' interno del noatro "div.carousel".
+    // Stampo la "nuovaCarta" nel "div.elements-container".
+    divElementsContainer.innerHTML += nuovaCarta;
+});  
+
+// Andiamo a selezionare il "div.element".
+let divElement = document.getElementById("index" + index);
+
+// Creo una condizione "Se l'indice è uguale a 0, vado ad aggiungere la classe 'active', altrimenti avrà la classe 'hidden'".
+
+if(index === 0){
+    divElement.classList.add("active");
+}else
+    divElement.classList.add("hidden");
+
+// Milestone 2:
+// Aggiungere il **ciclo infinito** del carosello. Ovvero se l’img attiva è la prima e l’utente clicca la freccia prev, l’img che deve attivarsi sarà l’ultima e viceversa per l’ultima img se l’utente clicca la freccia next.
+
+// Andiamo a collegare il nostro bottone "next" e inserirlo all' interno del nostro "div.carousel".
 
 let btnNext = document.querySelector(".next");
 divCarousel.append(btnNext);
 
-let btnPrev = document.querySelector(".prev");
-divCarousel.append(btnPrev);
+// Creo un evento al "button.next"
+btnNext.addEventListener("click", function () {
+    
+    // Incrementiamo di +1 con l'index.
+    index++;
 
+    // Quando l'index sara maggiore dell'ultima "image".
+    if (index > images.length - 1) {
+    
+    // L'index ritorna a 0.
+    index = 0;
+  }
 
+    // Andiamo a rimuovere l'active all'index precedente
+    divElement.classList.remove("active");  
 
+    // Andiamo ad aggiungere l'hidden all'index precedente
+    divElement.classList.add("hidden"); 
 
+    // incrementiamo di +1 richiamando "div.elemtent"
+    divElement = document.getElementById("index" + index); 
+
+    // Andiamo ad aggiungere l'active all'index seguente.
+    divElement.classList.add("active");     
+
+    // Andiamo a rimuovere l'hidden all'index seguente.   
+    divElement.classList.remove("hidden");
+    }
+);
+
+// Andiamo a collegare il nostro bottone "prev" e inserirlo all' interno del nostro "div.carousel".
+
+let btnDown = document.querySelector(".prev");
+divCarousel.append(btnDown);
+
+// Creo un evento al "button.prev"
+
+btnDown.addEventListener("click", function (){
+  
+    // Decrementiamo di -1 con l'index.
+    index--;
+
+    // Quando l'index sarà minore di 0.
+    if (index < 0) {
+
+    // L'index partirà dall'ultima "image".
+    index = images.length - 1;
+  }
+    
+    // Andiamo a rimuovere l'active all'index precedente
+    divElement.classList.remove("active");  
+
+    // Andiamo ad aggiungere l'hidden all'index precedente
+    divElement.classList.add("hidden"); 
+
+    // incrementiamo di +1 richiamando "div.elemtent"
+    divElement = document.getElementById("index" + index); 
+
+    // Andiamo ad aggiungere l'active all'index seguente.
+    divElement.classList.add("active");     
+
+    // Andiamo a rimuovere l'hidden all'index seguente.   
+    divElement.classList.remove("hidden");
+  }
+);
 
