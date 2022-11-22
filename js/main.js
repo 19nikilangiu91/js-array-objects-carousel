@@ -5,6 +5,42 @@ Creare un carosello come nella foto allegata. */
 /* Milestone 0:
 Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l’immagine grande in modo da poter stilare lo slider. */
 
+// Milestone 1:
+// Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
+// Al click dell’utente sulle frecce, l’immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
+
+// Andiamo a selezionare il nostro "Container".
+let container = document.querySelector(".container");
+console.log(container);
+
+// Andiamo a creare il nostro "div" e andiamo ad aggiungere la classe "carousel".
+let divCarousel = document.createElement("div");
+
+divCarousel.classList.add("carousel");
+console.log(divCarousel);
+
+// Andiamo a inserire il "div.carousel" all'interno del "container".
+container.append(divCarousel);
+
+// Andiamo a creare il nostro "div" e andiamo ad aggiungere la classe "elements-container".
+let divElementsContainer = document.createElement("div");
+
+divElementsContainer.classList.add("elements-container");
+console.log(divElementsContainer);
+
+// Andiamo a inserire il "div.elements-container" all'interno del "div.carousel".
+divCarousel.append(divElementsContainer);
+
+// // Andiamo a creare il nostro "div" e andiamo ad aggiungere la classe "element" e la classe "active".
+
+// let divElement = document.createElement("div");
+// divElement.classList.add("element");
+// divElement.classList.add("active");
+
+// // Andiamo a inserire il "div.elements-container" all'interno del "div.carousel".
+// divElementsContainer.append(divElement);
+// console.log(divElement)
+
 // Andiamo a creare il nostro "array" che conterrà le nostre immagini.
 
 const images = [ 
@@ -36,3 +72,38 @@ const images = [
 ];
 
 console.log(images);
+
+images.forEach((element) => {
+
+     // Andiamo a creare il nostro "div" e andiamo ad aggiungere la classe "element" e la classe "active".
+
+    let divElement = document.createElement("div");
+    divElement.classList.add("element");
+    divElement.classList.add("active");
+
+    // Andiamo a inserire il "div.elements-container" all'interno del "div.carousel".
+    divElementsContainer.append(divElement);
+    console.log(divElement)
+
+    let nuovaCarta = [
+    `
+        <img src="${element.image}" alt="image ${element.image +1}">
+            <h1>${element.title}</h1>
+            <p>${element.text}</p>
+    `
+    ]
+    divElement.innerHTML += nuovaCarta;
+})
+
+// Andiamo a collegare il nostro bottone "next" e "prev" e inserirlo all' interno del noatro "div.carousel".
+
+let btnNext = document.querySelector(".next");
+divCarousel.append(btnNext);
+
+let btnPrev = document.querySelector(".prev");
+divCarousel.append(btnPrev);
+
+
+
+
+
