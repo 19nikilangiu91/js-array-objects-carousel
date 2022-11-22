@@ -31,16 +31,6 @@ console.log(divElementsContainer);
 // Andiamo a inserire il "div.elements-container" all'interno del "div.carousel".
 divCarousel.append(divElementsContainer);
 
-// // Andiamo a creare il nostro "div" e andiamo ad aggiungere la classe "element" e la classe "active".
-
-// let divElement = document.createElement("div");
-// divElement.classList.add("element");
-// divElement.classList.add("active");
-
-// // Andiamo a inserire il "div.elements-container" all'interno del "div.carousel".
-// divElementsContainer.append(divElement);
-// console.log(divElement)
-
 // Andiamo a creare il nostro "array" che conterrà le nostre immagini.
 
 const images = [ 
@@ -73,13 +63,18 @@ const images = [
 
 console.log(images);
 
-images.forEach((element) => {
+images.forEach((element,index) => {
 
      // Andiamo a creare il nostro "div" e andiamo ad aggiungere la classe "element" e la classe "active".
 
     let divElement = document.createElement("div");
     divElement.classList.add("element");
-    divElement.classList.add("active");
+
+    if(index === 0){
+        divElement.classList.add("active");
+    }else
+        divElement.classList.add("hidden");
+
 
     // Andiamo a inserire il "div.elements-container" all'interno del "div.carousel".
     divElementsContainer.append(divElement);
